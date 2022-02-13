@@ -1,8 +1,9 @@
 import { NextPage } from "next";
+import Button from "components/Button";
 
 const ItemDetail: NextPage = () => {
   return (
-    <div className="px-4 py-10">
+    <div className="px-4 py-16">
       <div className="mb-5">
         <div className="h-96 bg-slate-300 -mx-4" />
         <div className="flex items-center space-x-4 py-4 border-t border-b cursor-pointer">
@@ -28,12 +29,9 @@ const ItemDetail: NextPage = () => {
             motherfucker to get shot. You understand?
           </p>
           <div className="flex items-center justify-between space-x-2">
-            <button
-              className="flex-1 border bg-orange-400 text-white py-3 rounded-md shadow-sm font-medium 
-                hover:bg-orange-500  focus:ring-2 focus:ring-offset-5 focus:ring-orange-500 focus:bg-orange-500 outline-none"
-            >
+            <Button type="button" className="flex-1 ">
               Talk to seller
-            </button>
+            </Button>
             <button className="p-3 flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 rounded-md">
               <svg
                 className="h-6 w-6 "

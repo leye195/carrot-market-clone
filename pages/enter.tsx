@@ -1,6 +1,8 @@
 import { NextPage } from "next";
 import { useState } from "react";
 
+import Button from "components/Button";
+
 const Enter: NextPage = () => {
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => setMethod("email");
@@ -36,13 +38,17 @@ const Enter: NextPage = () => {
           </div>
         </div>
         <form className="flex flex-col mt-6">
-          <label className="text-sm text-gray-700">
+          <label
+            className="text-sm text-gray-700"
+            htmlFor={method === "email" ? "email" : "phone"}
+          >
             {method === "email" ? "Email address" : null}
             {method === "phone" ? "Phone number" : null}
           </label>
           <div className="mt-2">
             {method === "email" ? (
               <input
+                id="email"
                 className="w-full appearance-none px-3 py-2 border-gray-300 rounded-md  placeholder-gray-400 shadow-sm 
                 focus:outline-none focus:ring-orange-400 focus:border-orange-400"
                 type="email"
@@ -55,6 +61,7 @@ const Enter: NextPage = () => {
                   +82
                 </span>
                 <input
+                  id="phone"
                   className="w-full appearance-none px-3 py-2 border-gray-300 rounded-r-md   placeholder-gray-400 shadow-sm 
                   focus:outline-none focus:ring-orange-400 focus:border-orange-400"
                   type="number"
@@ -63,7 +70,7 @@ const Enter: NextPage = () => {
               </div>
             ) : null}
           </div>
-          <button
+          <Button
             type="button"
             className="bg-orange-400 text-white hover:bg-orange-600 px-4 py-2 border-transparent rounded-md mt-6 shadow-sm font-medium
             focus:ring-offset-2 focus:ring-orange-400 focus:outline-none
@@ -71,7 +78,7 @@ const Enter: NextPage = () => {
           >
             {method === "email" ? "Get login link" : null}
             {method === "phone" ? "Get one-time password" : null}
-          </button>
+          </Button>
         </form>
         <div className="mt-6">
           <div className="relative">
@@ -85,7 +92,7 @@ const Enter: NextPage = () => {
           <div className="grid grid-cols-2 gap-3 mt-4">
             <button
               className="flex justify-center items-center py-2 px-3 border border-gray-300 rounded-md shadow-sm bg-white font-medium text-gray-500 
-            hover:text-blue-400 hover:bg-gray-50 transition-all duration-500"
+            hover:text-blue-400 hover:bg-gray-50 transition-colors duration-500"
             >
               <svg
                 className="w-5 h-5"
@@ -98,7 +105,7 @@ const Enter: NextPage = () => {
             </button>
             <button
               className="flex justify-center items-center py-2 px-3 border border-gray-300 rounded-md shadow-sm bg-white font-medium text-gray-500 
-            hover:text-black hover:bg-gray-50 transition-all duration-500"
+            hover:text-black hover:bg-gray-50 transition-color duration-500"
             >
               <svg
                 className="w-5 h-5"
