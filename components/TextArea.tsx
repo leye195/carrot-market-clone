@@ -1,9 +1,18 @@
 type Props = {
   id?: string;
   className?: string;
+  placeholder?: string;
+  value?: string;
+  onChange?: () => void;
 };
 
-const TextArea = ({ id = "", className = "" }: Props) => {
+const TextArea = ({
+  id = "",
+  className = "",
+  placeholder = "",
+  value = "",
+  onChange,
+}: Props) => {
   return (
     <textarea
       id={id}
@@ -11,6 +20,9 @@ const TextArea = ({ id = "", className = "" }: Props) => {
     focus:outline-none focus:ring-orange-400 focus:border-orange-400 ${className}
   `}
       rows={4}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
     ></textarea>
   );
 };
