@@ -10,7 +10,7 @@ const Community: NextPage = () => {
             className="flex flex-col items-start pt-4 bg-white cursor-pointer"
             key={i}
           >
-            <span className="flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-gray-100">
+            <span className="flex items-center mx-2 px-3 py-0.5 rounded-md text-xs font-medium bg-gray-100">
               동네질문
             </span>
             <p className="px-3 mt-2 text-gray-700 ">

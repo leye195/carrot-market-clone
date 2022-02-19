@@ -7,7 +7,7 @@ const ItemDetail: NextPage = () => {
     <div className="px-4 py-16">
       <div className="mb-5">
         <div className="h-96 bg-slate-300 -mx-4" />
-        <Profile name="Steve Jebs" />
+        <Profile name="Steve Jebs" desc="View Profile &rarr;" />
         <div className="mt-6">
           <h1 className="text-3xl font-bold text-gray-900">Galaxy S100</h1>
           <span className="text-2xl mt-3 text-gray-900">$100</span>

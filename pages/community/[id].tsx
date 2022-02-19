@@ -1,7 +1,7 @@
+import type { NextPage } from "next";
 import Button from "components/Button";
 import Profile from "components/Profile";
 import TextArea from "components/TextArea";
-import type { NextPage } from "next";
 
 const CommunityPostDetail: NextPage = () => {
   return (
@@ -10,7 +10,11 @@ const CommunityPostDetail: NextPage = () => {
         <span className="inline-flex items-center mx-2 px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100">
           동네질문
         </span>
-        <Profile className="px-3 mb-3 border-t-0" name="Steve Jebs" />
+        <Profile
+          className="px-3 mb-3 border-t-0"
+          name="Steve Jebs"
+          desc="View Profile &rarr;"
+        />
       </div>
       <div className="flex flex-col items-start">
         <p className="px-3 text-gray-700 ">
