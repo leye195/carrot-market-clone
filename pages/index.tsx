@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import FloatingButton from "components/FloatingButton";
 
 const Home: NextPage = () => {
   return (
@@ -56,11 +57,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       ))}
-      <button
-        className="fixed bottom-20 right-5 bg-orange-400 rounded-full p-3 text-white shadow-xl
-        hover:bg-orange-500 cursor-pointer transition-colors
-      "
-      >
+      <FloatingButton>
         <svg
           className="h-6 w-6"
           xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +73,7 @@ const Home: NextPage = () => {
             d="M12 6v6m0 0v6m0-6h6m-6 0H6"
           />
         </svg>
-      </button>
+      </FloatingButton>
     </div>
   );
 };

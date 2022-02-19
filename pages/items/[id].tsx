@@ -1,20 +1,13 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import Button from "components/Button";
+import Profile from "components/Profile";
 
 const ItemDetail: NextPage = () => {
   return (
     <div className="px-4 py-16">
       <div className="mb-5">
         <div className="h-96 bg-slate-300 -mx-4" />
-        <div className="flex items-center space-x-4 py-4 border-t border-b cursor-pointer">
-          <div className="w-12 h-12 bg-slate-300 rounded-full" />
-          <div>
-            <p className="text-sm font-medium text-gray-700">Steve Jebs</p>
-            <p className="text-xs font-medium text-gray-500">
-              View Profile &rarr;
-            </p>
-          </div>
-        </div>
+        <Profile name="Steve Jebs" />
         <div className="mt-6">
           <h1 className="text-3xl font-bold text-gray-900">Galaxy S100</h1>
           <span className="text-2xl mt-3 text-gray-900">$100</span>

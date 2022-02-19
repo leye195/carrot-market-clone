@@ -1,5 +1,6 @@
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import Button from "components/Button";
+import TextArea from "components/TextArea";
 
 const ItemUpload: NextPage = () => {
   return (
@@ -54,13 +55,7 @@ const ItemUpload: NextPage = () => {
         >
           Description
         </label>
-        <textarea
-          id="description"
-          className="mb-4 shadow-sm w-full resize-none rounded-md outline-none border-gray-300
-            focus:outline-none focus:ring-orange-400 focus:border-orange-400
-          "
-          rows={4}
-        ></textarea>
+        <TextArea id="description" />
       </div>
       <Button type="button">Upload product</Button>
     </div>
