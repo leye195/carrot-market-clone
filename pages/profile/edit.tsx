@@ -4,14 +4,14 @@ import type { NextPage } from "next";
 const EditProfile: NextPage = () => {
   return (
     <div className="py-10 space-y-4">
-      <div className="flex items-center space-x-3 px-3">
-        <div className="w-14 h-14 rounded-full bg-slate-500" />
+      <div className="flex flex-col items-center space-y-3 px-3">
+        <div className="w-20 h-20 rounded-full bg-slate-500" />
         <label
           htmlFor="picture"
           className="cursor-pointer py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium focus:ring-offset-2 focus:ring-orange-400 focus:outline-none"
         >
-          Change
-          <input className="hidden" type="file" id="picfure" accept="image/*" />
+          Change Photo
+          <input className="hidden" type="file" id="picture" accept="image/*" />
         </label>
       </div>
       <div className="px-3 space-y-2">
