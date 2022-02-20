@@ -4,7 +4,7 @@ import TextArea from "components/TextArea";
 
 const ItemUpload: NextPage = () => {
   return (
-    <div className="px-4 py-16 flex flex-col">
+    <div className="px-4 py-10 space-y-5 flex flex-col">
       <div>
         <label
           className="w-full flex items-center justify-center border-2 border-dashed  border-gray-300 h-48 rounded-md
@@ -28,7 +28,23 @@ const ItemUpload: NextPage = () => {
           <input className="hidden" type="file" />
         </label>
       </div>
-      <div className="my-6">
+      <div>
+        <label className="text-sm text-gray-700 block mb-1.5" htmlFor="name">
+          Name
+        </label>
+        <div className="flex items-center rounded-md shadow-sm relative">
+          <div className="absolute left-0 pl-2 flex items-center justify-center text-sm pointer-events-none">
+            <span className="text-gray-500 ">$</span>
+          </div>
+          <input
+            id="name"
+            className="w-full appearance-none pl-6 py-2 border-gray-300 rounded-md  placeholder-gray-400 shadow-sm 
+                focus:outline-none focus:ring-orange-400 focus:border-orange-400"
+            type="text"
+          />
+        </div>
+      </div>
+      <div>
         <label className="text-sm text-gray-700 block mb-1.5" htmlFor="price">
           Price
         </label>
