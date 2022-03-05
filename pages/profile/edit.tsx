@@ -1,5 +1,8 @@
 import Button from "components/Button";
+import EmailInput from "components/EmailInput";
+import Input from "components/Input";
 import Layout from "components/Layout";
+import PhoneInput from "components/PhoneInput";
 import type { NextPage } from "next";
 
 const EditProfile: NextPage = () => {
@@ -21,35 +24,18 @@ const EditProfile: NextPage = () => {
             />
           </label>
         </div>
-        <div className="px-3 space-y-2">
-          <label className="text-sm text-gray-700" htmlFor="email">
-            Email Address
-          </label>
-          <input
-            id="email"
-            className="w-full appearance-none px-3 py-2 border-gray-300 rounded-md  placeholder-gray-400 shadow-sm 
-                focus:outline-none focus:ring-orange-400 focus:border-orange-400"
-            type="email"
-            required
-          />
-        </div>
-        <div className="px-3 space-y-2">
-          <label className="text-sm text-gray-700" htmlFor="phone">
-            Phone Number
-          </label>
-          <div className="flex rounded-md shadow-md">
-            <span className="flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 select-none text-sm">
-              +82
-            </span>
-            <input
-              id="phone"
-              className="w-full appearance-none px-3 py-2 border-gray-300 rounded-r-md   placeholder-gray-400 shadow-sm 
-                  focus:outline-none focus:ring-orange-400 focus:border-orange-400"
-              type="number"
-              required
-            />
-          </div>
-        </div>
+        <Input
+          label="Email Address"
+          name="email"
+          className="px-3 space-y-2"
+          kind="email"
+        />
+        <Input
+          label="Phone Number"
+          name="phone"
+          className="px-3 space-y-2"
+          kind="phone"
+        />
         <div className="mt-6 px-3">
           <Button
             type="button"

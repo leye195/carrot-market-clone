@@ -1,6 +1,6 @@
-import { classnames } from "lib";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { classnames } from "lib";
 
 type Props = {
   title?: string;
@@ -10,10 +10,10 @@ type Props = {
 };
 
 const Layout = ({ children, title, hasTabBar, canGoBack }: Props) => {
-  const router = useRouter();
+  const { back } = useRouter();
 
   const handleClick = () => {
-    router.back();
+    back();
   };
 
   return (
@@ -66,6 +66,7 @@ const Layout = ({ children, title, hasTabBar, canGoBack }: Props) => {
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
               </svg>
+
               <span className="text-sm">홈</span>
             </a>
           </Link>

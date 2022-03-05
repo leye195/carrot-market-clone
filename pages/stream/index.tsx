@@ -2,23 +2,20 @@ import type { NextPage } from "next";
 import FloatingButton from "components/FloatingButton";
 import Layout from "components/Layout";
 import { useRouter } from "next/router";
+import StreamRoom from "components/StreamRoom";
 
-const Live: NextPage = () => {
+const Stream: NextPage = () => {
   const router = useRouter();
 
   const handleLink = () => {
     router.push("/stream/create");
   };
+
   return (
     <Layout title="라이브" hasTabBar>
-      <div className="py-5 space-y-4 divide-y-2">
+      <div className="pb-5 space-y-4 divide-y-2">
         {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="px-3 pt-4">
-            <div className="w-full bg-slate-400 aspect-video rounded-md shadow-sm" />
-            <h3 className="text-gray-700 text-lg mt-2">
-              Let&rsquo;s try tomato
-            </h3>
-          </div>
+          <StreamRoom key={i} />
         ))}
         <FloatingButton onClick={handleLink}>
           <svg
@@ -41,4 +38,4 @@ const Live: NextPage = () => {
   );
 };
 
-export default Live;
+export default Stream;

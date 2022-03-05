@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Button from "components/Button";
 import Profile from "components/Profile";
 import Layout from "components/Layout";
+import SimilarItem from "components/SimilarItem";
 
 const ItemDetail: NextPage = () => {
   return (
@@ -54,11 +55,7 @@ const ItemDetail: NextPage = () => {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[1, 2, 3, 4, 5, 6].map((_, i) => (
-              <div key={i}>
-                <div className="h-52 w-full bg-slate-300 mb-3 rounded-md" />
-                <h3 className=" text-gray-700 -mb-1">Galaxy S60</h3>
-                <span className="text-sm font-medium text-gray-900">$6</span>
-              </div>
+              <SimilarItem key={i} />
             ))}
           </div>
         </div>

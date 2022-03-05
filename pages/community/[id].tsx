@@ -3,12 +3,13 @@ import Button from "components/Button";
 import Profile from "components/Profile";
 import TextArea from "components/TextArea";
 import Layout from "components/Layout";
+import Comment from "components/Comment";
 
 const CommunityPostDetail: NextPage = () => {
   return (
     <Layout canGoBack>
-      <div className="py-16">
-        <div className="border-t pt-4">
+      <div className="pb-8">
+        <div className="pt-4">
           <span className="inline-flex items-center mx-2 px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100">
             동네질문
           </span>
@@ -61,42 +62,9 @@ const CommunityPostDetail: NextPage = () => {
           </div>
         </div>
         <div className="px-3 my-5 space-y-4">
-          <div className="flex items-start space-x-3">
-            <div className="w-8 h-8 bg-slate-200 rounded-full" />
-            <div>
-              <span className="text-sm block font-medium text-gray-700">
-                Steve Jebs
-              </span>
-              <span className="text-xs text-gray-500 block">2시간 전</span>
-              <p className="text-gray-700">
-                The best mandu restaurant is the one next to my house
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start space-x-3">
-            <div className="w-8 h-8 bg-slate-200 rounded-full" />
-            <div>
-              <span className="text-sm block font-medium text-gray-700">
-                Steve Jebs
-              </span>
-              <span className="text-xs text-gray-500 block">2시간 전</span>
-              <p className="text-gray-700">
-                The best mandu restaurant is the one next to my house
-              </p>
-            </div>
-          </div>
-          <div className="flex items-start space-x-3">
-            <div className="w-8 h-8 bg-slate-200 rounded-full" />
-            <div>
-              <span className="text-sm block font-medium text-gray-700">
-                Steve Jebs
-              </span>
-              <span className="text-xs text-gray-500 block">2시간 전</span>
-              <p className="text-gray-700 mt-2">
-                The best mandu restaurant is the one next to my house
-              </p>
-            </div>
-          </div>
+          <Comment />
+          <Comment />
+          <Comment />
         </div>
         <div className="px-3 mt-2">
           <label></label>
