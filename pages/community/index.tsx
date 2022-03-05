@@ -1,10 +1,17 @@
 import type { NextPage } from "next";
 import FloatingButton from "components/FloatingButton";
+import Layout from "components/Layout";
+import { useRouter } from "next/router";
 
 const Community: NextPage = () => {
+  const router = useRouter();
+
+  const handleLink = () => {
+    router.push("/community/write");
+  };
   return (
-    <>
-      <div className="py-16 space-y-4 bg-gray-200">
+    <Layout title="동네생활" hasTabBar>
+      <div className="space-y-4 bg-gray-200">
         {[1, 2, 3, 4, 5].map((_, i) => (
           <div
             className="flex flex-col items-start pt-4 bg-white cursor-pointer"
@@ -60,7 +67,7 @@ const Community: NextPage = () => {
           </div>
         ))}
       </div>
-      <FloatingButton>
+      <FloatingButton onClick={handleLink}>
         <svg
           className="w-6 h-6"
           fill="none"
@@ -76,7 +83,7 @@ const Community: NextPage = () => {
           ></path>
         </svg>
       </FloatingButton>
-    </>
+    </Layout>
   );
 };
 
