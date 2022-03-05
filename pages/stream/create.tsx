@@ -8,7 +8,7 @@ const CreateStream: NextPage = () => {
   return (
     <Layout title="라이브 생성" canGoBack>
       <div className="px-4 py-10 space-y-5">
-        <Input label="Name" name="name" />
+        <Input label="Name" name="name" type="text" />
         <Input label="Price" name="price" kind="price" />
         <TextArea name="description" label="Description" />
         <Button className="w-full" type="button">

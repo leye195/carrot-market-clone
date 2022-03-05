@@ -31,7 +31,7 @@ const ItemUpload: NextPage = () => {
             <input className="hidden" type="file" />
           </label>
         </div>
-        <Input label="Name" name="name" />
+        <Input label="Name" name="name" type="text" />
         <Input label="Price" name="price" kind="price" />
 
         <TextArea label="Description" name="description" />

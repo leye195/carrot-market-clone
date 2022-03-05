@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import FloatingButton from "components/FloatingButton";
 import Layout from "components/Layout";
@@ -14,7 +15,11 @@ const Community: NextPage = () => {
     <Layout title="동네생활" hasTabBar>
       <div className="space-y-4 bg-gray-200">
         {[1, 2, 3, 4, 5].map((_, i) => (
-          <Question key={i} />
+          <Link href={`/community/${i}`} key={i}>
+            <a className="block">
+              <Question />
+            </a>
+          </Link>
         ))}
       </div>
       <FloatingButton onClick={handleLink}>

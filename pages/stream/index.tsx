@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import FloatingButton from "components/FloatingButton";
 import Layout from "components/Layout";
 import { useRouter } from "next/router";
@@ -13,9 +14,13 @@ const Stream: NextPage = () => {
 
   return (
     <Layout title="라이브" hasTabBar>
-      <div className="pb-5 space-y-4 divide-y-2">
+      <div className="pb-5 space-y-4 divide-y-4">
         {[1, 2, 3, 4, 5].map((i) => (
-          <StreamRoom key={i} />
+          <Link key={i} href={`/stream/${i}`}>
+            <a className="block ">
+              <StreamRoom title="당근 라이브" key={i} />
+            </a>
+          </Link>
         ))}
         <FloatingButton onClick={handleLink}>
           <svg

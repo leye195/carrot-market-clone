@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Layout = ({ children, title, hasTabBar, canGoBack }: Props) => {
-  const { back } = useRouter();
+  const { back, pathname } = useRouter();
 
   const handleClick = () => {
     back();
@@ -50,7 +50,12 @@ const Layout = ({ children, title, hasTabBar, canGoBack }: Props) => {
       {hasTabBar && (
         <nav className="fixed bg-white bottom-0  text-gray-700 border-t py-2 px-6 flex justify-between items-center w-full max-w-xl cursor-pointer">
           <Link href="/">
-            <a className="flex flex-col items-center justify-center space-y-2">
+            <a
+              className={classnames(
+                "flex flex-col items-center justify-center space-y-2",
+                pathname === "/" ? "text-orange-400" : ""
+              )}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -71,7 +76,12 @@ const Layout = ({ children, title, hasTabBar, canGoBack }: Props) => {
             </a>
           </Link>
           <Link href="/community">
-            <a className="flex flex-col items-center justify-center space-y-2">
+            <a
+              className={classnames(
+                "flex flex-col items-center justify-center space-y-2",
+                pathname === "/community" ? "text-orange-400" : ""
+              )}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -90,7 +100,12 @@ const Layout = ({ children, title, hasTabBar, canGoBack }: Props) => {
             </a>
           </Link>
           <Link href="/stream">
-            <a className="flex flex-col items-center justify-center space-y-2">
+            <a
+              className={classnames(
+                "flex flex-col items-center justify-center space-y-2",
+                pathname === "/stream" ? "text-orange-400" : ""
+              )}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -109,7 +124,12 @@ const Layout = ({ children, title, hasTabBar, canGoBack }: Props) => {
             </a>
           </Link>
           <Link href="/chats">
-            <a className="flex flex-col items-center justify-center space-y-2">
+            <a
+              className={classnames(
+                "flex flex-col items-center justify-center space-y-2",
+                pathname === "/chats" ? "text-orange-400" : ""
+              )}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -128,7 +148,12 @@ const Layout = ({ children, title, hasTabBar, canGoBack }: Props) => {
             </a>
           </Link>
           <Link href="/profile">
-            <a className="flex flex-col items-center justify-center space-y-2">
+            <a
+              className={classnames(
+                "flex flex-col items-center justify-center space-y-2",
+                pathname === "/profile" ? "text-orange-400" : ""
+              )}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"

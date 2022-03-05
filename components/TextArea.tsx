@@ -4,8 +4,7 @@ type Props = {
   className?: string;
   placeholder?: string;
   value?: string;
-
-  onChange?: () => void;
+  [key: string]: any;
 };
 
 const TextArea = ({
@@ -15,6 +14,7 @@ const TextArea = ({
   placeholder = "",
   value = "",
   onChange,
+  ...rest
 }: Props) => {
   return (
     <div>
@@ -30,6 +30,7 @@ const TextArea = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        {...rest}
       ></textarea>
     </div>
   );

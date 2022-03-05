@@ -7,6 +7,7 @@ type Props = {
   required?: boolean;
   onChange?: () => void;
   kind?: "text" | "price" | "phone" | "email";
+  [key: string]: any;
 };
 
 const Input = ({
@@ -18,6 +19,7 @@ const Input = ({
   required,
   onChange,
   kind = "text",
+  ...rest
 }: Props) => {
   return (
     <div className={className}>
@@ -29,11 +31,11 @@ const Input = ({
           id={name}
           className={`w-full appearance-none  py-2 border-gray-300 rounded-md  placeholder-gray-400 shadow-sm 
       focus:outline-none focus:ring-orange-400 focus:border-orange-400`}
-          type="text"
           placeholder={placeholder}
           value={value}
           onChange={onChange}
           required={required}
+          {...rest}
         />
       )}
       {kind === "price" && (
@@ -50,6 +52,7 @@ const Input = ({
             value={value}
             onChange={onChange}
             required={required}
+            {...rest}
           />
           <div className="absolute right-0 text-sm pr-2  flex items-center justify-center pointer-events-none">
             <span className="text-gray-500">KRW</span>
@@ -69,6 +72,7 @@ const Input = ({
             required
             value={value}
             onChange={onChange}
+            {...rest}
           />
         </div>
       )}
@@ -81,6 +85,7 @@ const Input = ({
           required
           value={value}
           onChange={onChange}
+          {...rest}
         />
       )}
     </div>
