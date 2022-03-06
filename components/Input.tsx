@@ -1,3 +1,5 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+
 type Props = {
   label: string;
   name: string;
@@ -7,6 +9,7 @@ type Props = {
   required?: boolean;
   onChange?: () => void;
   kind?: "text" | "price" | "phone" | "email";
+  register?: UseFormRegisterReturn;
   [key: string]: any;
 };
 
@@ -19,6 +22,7 @@ const Input = ({
   required,
   onChange,
   kind = "text",
+  register,
   ...rest
 }: Props) => {
   return (
@@ -35,6 +39,7 @@ const Input = ({
           value={value}
           onChange={onChange}
           required={required}
+          {...register}
           {...rest}
         />
       )}
@@ -52,6 +57,7 @@ const Input = ({
             value={value}
             onChange={onChange}
             required={required}
+            {...register}
             {...rest}
           />
           <div className="absolute right-0 text-sm pr-2  flex items-center justify-center pointer-events-none">
@@ -72,6 +78,7 @@ const Input = ({
             required
             value={value}
             onChange={onChange}
+            {...register}
             {...rest}
           />
         </div>
@@ -85,6 +92,7 @@ const Input = ({
           required
           value={value}
           onChange={onChange}
+          {...register}
           {...rest}
         />
       )}

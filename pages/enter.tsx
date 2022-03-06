@@ -2,11 +2,33 @@ import type { NextPage } from "next";
 import { useState } from "react";
 
 import Button from "components/Button";
+import { useForm } from "react-hook-form";
+import Input from "components/Input";
+import { userInputType } from "types/input";
 
 const Enter: NextPage = () => {
+  const {
+    register,
+    formState: { errors },
+    reset,
+    handleSubmit,
+  } = useForm<userInputType>({
+    mode: "onChange",
+  });
+
   const [method, setMethod] = useState<"email" | "phone">("email");
-  const onEmailClick = () => setMethod("email");
-  const onPhoneClick = () => setMethod("phone");
+  const onEmailClick = () => {
+    setMethod("email");
+    reset();
+  };
+  const onPhoneClick = () => {
+    setMethod("phone");
+    reset();
+  };
+
+  const onValid = (data: userInputType) => {
+    console.log(data);
+  };
 
   return (
     <div className="mt-16 px-4">
@@ -37,41 +59,29 @@ const Enter: NextPage = () => {
             </button>
           </div>
         </div>
-        <form className="flex flex-col mt-6">
-          <label
-            className="text-sm text-gray-700"
-            htmlFor={method === "email" ? "email" : "phone"}
-          >
-            {method === "email" ? "Email address" : null}
-            {method === "phone" ? "Phone number" : null}
-          </label>
-          <div className="mt-2">
-            {method === "email" ? (
-              <input
-                id="email"
-                className="w-full appearance-none px-3 py-2 border-gray-300 rounded-md  placeholder-gray-400 shadow-sm 
-                focus:outline-none focus:ring-orange-400 focus:border-orange-400"
-                type="email"
-                required
-              />
-            ) : null}
-            {method === "phone" ? (
-              <div className="flex rounded-md shadow-md">
-                <span className="flex items-center justify-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 select-none text-sm">
-                  +82
-                </span>
-                <input
-                  id="phone"
-                  className="w-full appearance-none px-3 py-2 border-gray-300 rounded-r-md   placeholder-gray-400 shadow-sm 
-                  focus:outline-none focus:ring-orange-400 focus:border-orange-400"
-                  type="number"
-                  required
-                />
-              </div>
-            ) : null}
-          </div>
+        <form className="flex flex-col mt-6" onSubmit={handleSubmit(onValid)}>
+          {method === "email" ? (
+            <Input
+              kind="email"
+              label="Email address"
+              name="email"
+              register={register("email", {
+                required: "Email address is empty",
+              })}
+            />
+          ) : (
+            <Input
+              kind="phone"
+              label="Phone number"
+              name="phone"
+              register={register("phone", {
+                required: "Phone number is empty",
+              })}
+            />
+          )}
+
           <Button
-            type="button"
+            type="submit"
             className="bg-orange-400 text-white hover:bg-orange-600 px-4 py-2 border-transparent rounded-md mt-6 shadow-sm font-medium
             focus:ring-offset-2 focus:ring-orange-400 focus:outline-none
           "
