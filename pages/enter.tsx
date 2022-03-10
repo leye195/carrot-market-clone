@@ -5,8 +5,12 @@ import Button from "components/Button";
 import { useForm } from "react-hook-form";
 import Input from "components/Input";
 import { userInputType } from "types/input";
+import useMutation from "hooks/useMutation";
 
 const Enter: NextPage = () => {
+  const [enter, { loading, error, data }] = useMutation("users/enter");
+  const [submitting, setSubmitting] = useState(false);
+
   const {
     register,
     formState: { errors },
@@ -27,7 +31,7 @@ const Enter: NextPage = () => {
   };
 
   const onValid = (data: userInputType) => {
-    console.log(data);
+    enter(data);
   };
 
   return (
@@ -86,8 +90,16 @@ const Enter: NextPage = () => {
             focus:ring-offset-2 focus:ring-orange-400 focus:outline-none
           "
           >
-            {method === "email" ? "Get login link" : null}
-            {method === "phone" ? "Get one-time password" : null}
+            {method === "email"
+              ? loading
+                ? "Loading"
+                : "Get login link"
+              : null}
+            {method === "phone"
+              ? loading
+                ? "Loading"
+                : "Get one-time password"
+              : null}
           </Button>
         </form>
         <div className="mt-6">

@@ -1,4 +1,4 @@
-import { classnames } from "lib";
+import { classnames } from "lib/client/utils";
 
 type Props = {
   isMe?: boolean;
