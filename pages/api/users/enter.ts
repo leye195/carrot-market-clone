@@ -18,7 +18,7 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { phone, email } = req.body;
-  const user = phone ? { phone: +phone } : email ? { email } : null;
+  const user = phone ? { phone } : email ? { email } : null;
   const payload = Math.floor(10000 + Math.random() * 900000) + "";
 
   if (!user) return res.status(400).json({ ok: false });
@@ -67,10 +67,3 @@ async function handler(
 }
 
 export default withHandler("POST", handler);
-
-/*
- --> phone --> User?
- --> Token--User --> #random number
- --> #random number --> SMS --> phone (Twilio)
- --> enter token --> token?---User ---> log the user In
-*/
