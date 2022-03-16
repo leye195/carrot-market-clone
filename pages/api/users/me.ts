@@ -1,8 +1,7 @@
-import { withIronSessionApiRoute } from "iron-session/next";
-
 import { NextApiResponse, NextApiRequest } from "next";
 import withHandler, { ResponseType } from "lib/server/withHandler";
 import client from "lib/server/client";
+import withApiSession from "lib/server/withSesstion";
 
 async function handler(
   req: NextApiRequest,
@@ -20,7 +19,4 @@ async function handler(
   });
 }
 
-export default withIronSessionApiRoute(withHandler("GET", handler), {
-  cookieName: "loginsession",
-  password: process.env.COOKIE_PASSWORD!,
-});
+export default withApiSession(withHandler("GET", handler));

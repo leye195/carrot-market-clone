@@ -1,13 +1,15 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "components/Button";
 import { useForm } from "react-hook-form";
 import Input from "components/Input";
 import { tokenInputType, userInputType } from "types/input";
 import useMutation from "hooks/useMutation";
+import { useRouter } from "next/router";
 
 const Enter: NextPage = () => {
+  const router = useRouter();
   const [enter, { loading, error, data }] = useMutation("users/enter");
   const [
     confirmToken,
@@ -44,6 +46,12 @@ const Enter: NextPage = () => {
     if (tokenLoading) return;
     confirmToken(data);
   };
+
+  useEffect(() => {
+    if (tokenData?.ok) {
+      router.push("/");
+    }
+  }, [tokenData, router]);
 
   return (
     <div className="mt-16 px-4">
