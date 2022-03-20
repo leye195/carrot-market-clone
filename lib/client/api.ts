@@ -7,6 +7,14 @@ const api = axios.create({
   },
 });
 
-export const getUser = () => api.get("users/me");
+api.interceptors.response.use(
+  (res) => {
+    const { data } = res;
+    return data;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export default api;
