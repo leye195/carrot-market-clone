@@ -7,4 +7,6 @@ const api = axios.create({
   },
 });
 
+export const getUser = () => api.get("users/me");
+
 export default api;
