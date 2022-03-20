@@ -52,7 +52,7 @@ const Input = ({
             id={name}
             className={`w-full appearance-none pl-6 py-2 border-gray-300 rounded-md  placeholder-gray-400 shadow-sm 
       focus:outline-none focus:ring-orange-400 focus:border-orange-400 ${className}`}
-            type="text"
+            type="number"
             placeholder={placeholder}
             value={value}
             onChange={onChange}

@@ -22,5 +22,5 @@ async function handler(
 }
 
 export default withApiSession(
-  withHandler({ method: "GET", handler, isPrivate: true })
+  withHandler({ method: ["GET"], handler, isPrivate: true })
 );

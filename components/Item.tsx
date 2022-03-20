@@ -1,4 +1,5 @@
 type Props = {
+  id: number;
   title: string;
   subTitle?: string;
   price?: number;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 const Item = ({
+  id,
   title,
   subTitle,
   price = 0,

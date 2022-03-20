@@ -1,9 +1,13 @@
+import { UseFormRegisterReturn } from "react-hook-form";
+
 type Props = {
   label?: string;
   name?: string;
   className?: string;
   placeholder?: string;
+  onChange?: () => void;
   value?: string;
+  register?: UseFormRegisterReturn;
   [key: string]: any;
 };
 
@@ -12,8 +16,9 @@ const TextArea = ({
   className = "",
   label = "",
   placeholder = "",
-  value = "",
+  value,
   onChange,
+  register,
   ...rest
 }: Props) => {
   return (
@@ -30,6 +35,7 @@ const TextArea = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        {...register}
         {...rest}
       ></textarea>
     </div>

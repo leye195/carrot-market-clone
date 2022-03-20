@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
+type Method = "GET" | "POST" | "PUT" | "DELETE";
+
 type ConfigType = {
-  method: "GET" | "POST" | "PUT" | "DELETE";
+  method: Method[];
   handler: (req: NextApiRequest, res: NextApiResponse) => void;
   isPrivate?: boolean;
 };
@@ -20,7 +22,7 @@ export default function withHandler({
     req: NextApiRequest,
     res: NextApiResponse
   ): Promise<any> {
-    if (req.method !== method) {
+    if (req.method && !method.includes(req.method as Method)) {
       return res.status(405).end();
     }
 

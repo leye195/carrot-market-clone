@@ -4,7 +4,7 @@ import useSWR from "swr";
 
 const useUser = () => {
   const router = useRouter();
-  const { data, error } = useSWR("/users/me");
+  const { data, error } = useSWR("users/me");
 
   useEffect(() => {
     if (data) {
