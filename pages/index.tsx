@@ -1,18 +1,18 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import useSWR from "swr";
 import FloatingButton from "components/FloatingButton";
 import Layout from "components/Layout";
 import { useRouter } from "next/router";
 import Item from "components/Item";
 import useUser from "hooks/useUser";
+import useQuery from "hooks/useQuery";
 import CustomHead from "components/CustomHead";
 import { productsResponseType } from "types/product";
 
 const Home: NextPage = () => {
   const router = useRouter();
   const { user, isLoading } = useUser();
-  const { data } = useSWR<productsResponseType>("products");
+  const { data } = useQuery<productsResponseType>("products");
 
   const handleLink = () => {
     router.push("/products/upload");
