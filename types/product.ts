@@ -5,9 +5,10 @@ export type productsResponseType = {
   products: Product[];
 };
 
-export type productResponseType = {
+export type productDetailResponseType = {
   ok: boolean;
   product: Product & {
     user: User;
   };
+  relatedProducts: Product[];
 };
