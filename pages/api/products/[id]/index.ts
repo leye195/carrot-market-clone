@@ -32,24 +32,25 @@ async function handler(
       },
     }));
 
-    const relatedProducts = await client.product.findMany({
-      where: {
-        AND: {
-          id: {
-            not: product?.id,
+    const relatedProducts = terms
+      ? await client.product.findMany({
+          where: {
+            AND: {
+              id: {
+                not: product?.id,
+              },
+            },
+            OR: terms,
           },
-        },
-        OR: terms,
-      },
-      select: {
-        id: true,
-        name: true,
-        price: true,
-        image: true,
-        updatedAt: true,
-      },
-    });
-    console.log(relatedProducts);
+          select: {
+            id: true,
+            name: true,
+            price: true,
+            image: true,
+            updatedAt: true,
+          },
+        })
+      : [];
 
     return res.status(200).json({
       ok: true,
