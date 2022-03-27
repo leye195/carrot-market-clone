@@ -2,7 +2,9 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useSWRConfig } from "swr";
 
+import { classnames } from "lib/client/utils";
 import useQuery from "hooks/useQuery";
 import useMutation from "hooks/useMutation";
 import useUser from "hooks/useUser";
@@ -14,8 +16,6 @@ import Layout from "components/Layout";
 import SimilarItem from "components/SimilarItem";
 import Dimmer from "components/Dimmer";
 import Indicator from "components/Indicator";
-import { classnames } from "lib/client/utils";
-import { useSWRConfig } from "swr";
 
 const ItemDetail: NextPage = () => {
   const { query, replace } = useRouter();

@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
-import Button from "components/Button";
 import { useForm } from "react-hook-form";
-import Input from "components/Input";
+
 import { tokenInputType, userInputType } from "types/input";
 import useMutation from "hooks/useMutation";
-import { useRouter } from "next/router";
+
+import Button from "components/Button";
+import Input from "components/Input";
 
 const Enter: NextPage = () => {
   const router = useRouter();

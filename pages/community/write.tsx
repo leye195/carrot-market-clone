@@ -1,14 +1,15 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+
+import { writePostInputType, writePostMutationType } from "types/post";
+import useMutation from "hooks/useMutation";
+import { classnames } from "lib/client/utils";
+
 import Button from "components/Button";
 import TextArea from "components/TextArea";
 import Layout from "components/Layout";
-import { useForm } from "react-hook-form";
-import { writePostInputType, writePostMutationType } from "types/post";
-import useMutation from "hooks/useMutation";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { classnames } from "lib/client/utils";
-import Indicator from "components/Indicator";
 
 const Write: NextPage = () => {
   const router = useRouter();
@@ -41,7 +42,7 @@ const Write: NextPage = () => {
           type="submit"
           disabled={loading}
         >
-          Submit
+          {loading ? "Loading..." : "Submit"}
         </Button>
       </form>
     </Layout>

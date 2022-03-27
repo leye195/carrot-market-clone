@@ -1,4 +1,9 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+import useQuery from "hooks/useQuery";
+
 import Button from "components/Button";
 import Profile from "components/Profile";
 import TextArea from "components/TextArea";
@@ -6,6 +11,15 @@ import Layout from "components/Layout";
 import Comment from "components/Comment";
 
 const CommunityPostDetail: NextPage = () => {
+  const router = useRouter();
+  const { data, loading, error } = useQuery(`posts/${router.query.id}`);
+
+  useEffect(() => {
+    if (error) {
+      router.replace("/community");
+    }
+  }, [data, loading, error]);
+
   return (
     <Layout canGoBack>
       <div className="pb-8">

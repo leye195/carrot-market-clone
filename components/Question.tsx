@@ -9,7 +9,6 @@ type Props = {
 };
 
 const Question = ({ name, question, answers, wonders, updatedAt }: Props) => {
-  console.log(updatedAt);
   return (
     <div className="flex flex-col items-start pt-4 bg-white cursor-pointer">
       <span className="flex items-center mx-2 px-3 py-0.5 rounded-md text-xs font-medium bg-gray-100">

@@ -1,9 +1,7 @@
+import type { NextPage } from "next";
 import Button from "components/Button";
-import EmailInput from "components/EmailInput";
 import Input from "components/Input";
 import Layout from "components/Layout";
-import PhoneInput from "components/PhoneInput";
-import type { NextPage } from "next";
 
 const EditProfile: NextPage = () => {
   return (

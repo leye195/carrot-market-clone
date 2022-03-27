@@ -1,6 +1,7 @@
+import type { NextPage } from "next";
+
 import Item from "components/Item";
 import Layout from "components/Layout";
-import type { NextPage } from "next";
 
 const Sold: NextPage = () => {
   return (
@@ -9,6 +10,7 @@ const Sold: NextPage = () => {
         {[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map((_, i) => (
           <Item
             key={i}
+            id={i}
             title="testItem"
             subTitle="black"
             price={3}

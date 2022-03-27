@@ -8,6 +8,8 @@ import { postResponseType } from "types/post";
 import FloatingButton from "components/FloatingButton";
 import Layout from "components/Layout";
 import Question from "components/Question";
+import Dimmer from "components/Dimmer";
+import Indicator from "components/Indicator";
 
 const Community: NextPage = () => {
   const router = useRouter();
@@ -19,6 +21,11 @@ const Community: NextPage = () => {
 
   return (
     <Layout title="동네생활" hasTabBar>
+      {loading && (
+        <Dimmer>
+          <Indicator />
+        </Dimmer>
+      )}
       <div className="space-y-4 bg-gray-200">
         {data?.posts.map(({ id, question, user, _count, updatedAt }) => (
           <Link href={`/community/${id}`} key={id}>
