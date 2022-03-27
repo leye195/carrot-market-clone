@@ -1,23 +1,35 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+
+import useQuery from "hooks/useQuery";
+import { postResponseType } from "types/post";
+
 import FloatingButton from "components/FloatingButton";
 import Layout from "components/Layout";
 import Question from "components/Question";
 
 const Community: NextPage = () => {
   const router = useRouter();
+  const { data, error, loading } = useQuery<postResponseType>("posts");
 
   const handleLink = () => {
     router.push("/community/write");
   };
+
   return (
     <Layout title="동네생활" hasTabBar>
       <div className="space-y-4 bg-gray-200">
-        {[1, 2, 3, 4, 5].map((_, i) => (
-          <Link href={`/community/${i}`} key={i}>
+        {data?.posts.map(({ id, question, user, _count, updatedAt }) => (
+          <Link href={`/community/${id}`} key={id}>
             <a className="block">
-              <Question />
+              <Question
+                question={question}
+                name={user.name}
+                answers={_count.answers}
+                wonders={_count.wonderList}
+                updatedAt={updatedAt}
+              />
             </a>
           </Link>
         ))}
