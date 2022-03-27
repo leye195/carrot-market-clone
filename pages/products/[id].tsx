@@ -15,11 +15,18 @@ import SimilarItem from "components/SimilarItem";
 import Dimmer from "components/Dimmer";
 import Indicator from "components/Indicator";
 import { classnames } from "lib/client/utils";
+import { useSWRConfig } from "swr";
 
 const ItemDetail: NextPage = () => {
   const { query, replace } = useRouter();
-  const {} = useUser();
-  const { data, error, loading, mutate } = useQuery<productDetailResponseType>(
+  const { user, isLoading } = useUser();
+  const { mutate } = useSWRConfig();
+  const {
+    data,
+    error,
+    loading,
+    mutate: boundMutate,
+  } = useQuery<productDetailResponseType>(
     query.id && !isNaN(+query.id) ? `products/${query.id}` : null
   );
   const [toggleFav] = useMutation(`products/${query.id}/fav`);
@@ -27,7 +34,8 @@ const ItemDetail: NextPage = () => {
   const handleClickFavourite = () => {
     if (data) {
       toggleFav();
-      mutate({ ...data, isLiked: !data.isLiked }, false);
+      boundMutate((prev) => prev && { ...prev, isLiked: !prev.isLiked }, false);
+      mutate("users/me");
     }
   };
 

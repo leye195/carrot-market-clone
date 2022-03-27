@@ -2,7 +2,11 @@ import { Product, User } from "@prisma/client";
 
 export type productsResponseType = {
   ok: boolean;
-  products: Product[];
+  products: (Product & {
+    _count?: {
+      favs: number;
+    };
+  })[];
 };
 
 export type productDetailResponseType = {

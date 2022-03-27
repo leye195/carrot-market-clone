@@ -31,15 +31,15 @@ const Home: NextPage = () => {
         </Dimmer>
       )}
       <div className="flex flex-col space-y-5  relative divide-y-2">
-        {data?.products?.map(({ id, name, price }) => (
+        {data?.products?.map(({ id, name, price, _count }) => (
           <Link key={id} href={`/products/${id}`}>
             <a className="block">
               <Item
                 id={id}
                 title={name}
                 price={price}
-                comments={1}
-                hearts={1}
+                comments={0}
+                hearts={_count!.favs}
               />
             </a>
           </Link>
