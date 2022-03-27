@@ -1,18 +1,22 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import FloatingButton from "components/FloatingButton";
-import Layout from "components/Layout";
 import { useRouter } from "next/router";
-import Item from "components/Item";
+
 import useUser from "hooks/useUser";
 import useQuery from "hooks/useQuery";
-import CustomHead from "components/CustomHead";
 import { productsResponseType } from "types/product";
+
+import CustomHead from "components/CustomHead";
+import Dimmer from "components/Dimmer";
+import Item from "components/Item";
+import Indicator from "components/Indicator";
+import FloatingButton from "components/FloatingButton";
+import Layout from "components/Layout";
 
 const Home: NextPage = () => {
   const router = useRouter();
   const { user, isLoading } = useUser();
-  const { data } = useQuery<productsResponseType>("products");
+  const { data, loading } = useQuery<productsResponseType>("products");
 
   const handleLink = () => {
     router.push("/products/upload");
@@ -21,8 +25,13 @@ const Home: NextPage = () => {
   return (
     <Layout title="홈" hasTabBar>
       <CustomHead title="Home" />
+      {loading && (
+        <Dimmer>
+          <Indicator />
+        </Dimmer>
+      )}
       <div className="flex flex-col space-y-5  relative divide-y-2">
-        {data?.products.map(({ id, name, price }) => (
+        {data?.products?.map(({ id, name, price }) => (
           <Link key={id} href={`/products/${id}`}>
             <a className="block">
               <Item

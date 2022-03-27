@@ -10,6 +10,7 @@ async function handler(
   if (req.method === "GET") {
     const {
       query: { id },
+      session: { user },
     } = req;
 
     const product = await client.product.findUnique({
@@ -52,9 +53,20 @@ async function handler(
         })
       : [];
 
+    const isLiked = !!(await client.fav.findFirst({
+      where: {
+        productId: product?.id,
+        userId: user?.id,
+      },
+      select: {
+        id: true,
+      },
+    }));
+
     return res.status(200).json({
       ok: true,
       product,
+      isLiked,
       relatedProducts,
     });
   }

@@ -10,5 +10,6 @@ export type productDetailResponseType = {
   product: Product & {
     user: User;
   };
+  isLiked: boolean;
   relatedProducts: Product[];
 };

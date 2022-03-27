@@ -7,46 +7,44 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  if (req.method === "GET") {
-    const {
-      query: { id },
-      session: { user },
-    } = req;
+  const {
+    query: { id },
+    session: { user },
+  } = req;
 
-    const isExist = await client.fav.findFirst({
+  const isExist = await client.fav.findFirst({
+    where: {
+      productId: +id,
+      userId: user?.id,
+    },
+  });
+
+  if (isExist) {
+    await client.fav.delete({
       where: {
-        productId: +id,
-        userId: user?.id,
+        id: isExist.id,
       },
     });
-
-    if (isExist) {
-      await client.fav.delete({
-        where: {
-          id: isExist.id,
-        },
-      });
-    } else {
-      await client.fav.create({
-        data: {
-          user: {
-            connect: {
-              id: user?.id,
-            },
-          },
-          product: {
-            connect: {
-              id: +id,
-            },
+  } else {
+    await client.fav.create({
+      data: {
+        user: {
+          connect: {
+            id: user?.id,
           },
         },
-      });
-    }
-
-    return res.status(200).json({
-      ok: true,
+        product: {
+          connect: {
+            id: +id,
+          },
+        },
+      },
     });
   }
+
+  return res.status(200).json({
+    ok: true,
+  });
 }
 
 export default withApiSession(
