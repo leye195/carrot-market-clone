@@ -12,7 +12,7 @@ async function handler(
       query: { id },
     } = req;
 
-    const product = await client.post.findUnique({
+    const post = await client.post.findUnique({
       where: {
         id: +id,
       },
@@ -26,12 +26,28 @@ async function handler(
             createdAt: true,
           },
         },
+        answers: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                avatar: true,
+              },
+            },
+          },
+        },
+        _count: {
+          select: {
+            wonderList: true,
+          },
+        },
       },
     });
 
     return res.status(200).json({
       ok: true,
-      product,
+      post,
     });
   }
 }
