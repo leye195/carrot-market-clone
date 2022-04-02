@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 import FloatingButton from "components/FloatingButton";
 import Layout from "components/Layout";
-import { useRouter } from "next/router";
 import StreamRoom from "components/StreamRoom";
 
 const Stream: NextPage = () => {

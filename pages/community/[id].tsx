@@ -2,7 +2,11 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
+import { useSWRConfig } from "swr";
 
+import { classnames } from "lib/client/utils";
+import useUser from "hooks/useUser";
 import useMutation from "hooks/useMutation";
 import useQuery from "hooks/useQuery";
 import { postDetailResponseType, writeCommentInputType } from "types/post";
@@ -14,9 +18,6 @@ import Layout from "components/Layout";
 import Comment from "components/Comment";
 import Indicator from "components/Indicator";
 import Dimmer from "components/Dimmer";
-import { useSWRConfig } from "swr";
-import { classnames } from "lib/client/utils";
-import useUser from "hooks/useUser";
 
 const CommunityPostDetail: NextPage = () => {
   const { query, replace } = useRouter();
@@ -42,7 +43,7 @@ const CommunityPostDetail: NextPage = () => {
     useForm<writeCommentInputType>();
 
   useEffect(() => {
-    if (error) {
+    if (!data?.ok || error) {
       replace("/community");
     }
   }, [data, loading, error]);
@@ -112,11 +113,15 @@ const CommunityPostDetail: NextPage = () => {
           <span className="inline-flex items-center mx-2 px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100">
             동네질문
           </span>
-          <Profile
-            className="px-3 mb-3 border-t-0"
-            name={data?.post?.user.name ?? ""}
-            desc="View Profile &rarr;"
-          />
+          <Link href={`/users/profiles/${data?.post?.user?.id}`}>
+            <a>
+              <Profile
+                className="px-3 mb-3 border-t-0"
+                name={data?.post?.user.name ?? ""}
+                desc="View Profile &rarr;"
+              />
+            </a>
+          </Link>
         </div>
         <div className="flex flex-col items-start">
           <p className="px-3 text-gray-700 ">

@@ -17,6 +17,9 @@ async function handler(
       postId: +id,
       userId: user?.id,
     },
+    select: {
+      id: true,
+    },
   });
 
   if (isExist) {
