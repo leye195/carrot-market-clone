@@ -44,7 +44,7 @@ const CommunityPostDetail: NextPage = () => {
     useForm<writeCommentInputType>();
 
   useEffect(() => {
-    if (!data?.ok || error) {
+    if ((data && !data.ok) || error) {
       replace("/community");
     }
   }, [data, loading, error]);
