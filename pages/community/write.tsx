@@ -10,9 +10,11 @@ import { classnames } from "lib/client/utils";
 import Button from "components/Button";
 import TextArea from "components/TextArea";
 import Layout from "components/Layout";
+import useCoords from "hooks/useCoords";
 
 const Write: NextPage = () => {
   const router = useRouter();
+  const { lat, lng } = useCoords();
   const { register, handleSubmit } = useForm<writePostInputType>();
   const [uploadPost, { data, error, loading }] =
     useMutation<writePostMutationType>("posts");
@@ -27,6 +29,8 @@ const Write: NextPage = () => {
       router.replace("/community");
     }
   }, [data, error, loading]);
+
+  console.log(lat, lng);
 
   return (
     <Layout title="글쓰기" canGoBack>

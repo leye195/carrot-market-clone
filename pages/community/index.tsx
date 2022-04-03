@@ -11,6 +11,7 @@ import Question from "components/Question";
 import Dimmer from "components/Dimmer";
 import Indicator from "components/Indicator";
 import Icon from "components/Icon";
+import { useEffect } from "react";
 
 const Community: NextPage = () => {
   const router = useRouter();
@@ -20,6 +21,12 @@ const Community: NextPage = () => {
     router.push("/community/write");
   };
 
+  useEffect(() => {
+    if (error) {
+      router.replace("/404");
+    }
+  }, [error]);
+
   return (
     <Layout title="동네생활" hasTabBar>
       {loading && (
@@ -28,7 +35,7 @@ const Community: NextPage = () => {
         </Dimmer>
       )}
       <div className="space-y-4 bg-gray-200">
-        {data?.posts.map(({ id, question, user, _count, updatedAt }) => (
+        {data?.posts?.map(({ id, question, user, _count, updatedAt }) => (
           <Link href={`/community/${id}`} key={id}>
             <a className="block">
               <Question
