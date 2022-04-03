@@ -44,6 +44,8 @@ model Product {
   price       Int
   description String   @db.LongText
   image       String
+  lat         Float?
+  lng         Float?
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int
   favs        Fav[]
@@ -64,6 +66,8 @@ model Fav {
 model Post {
   id         Int         @id @default(autoincrement())
   question   String      @db.MediumText
+  lat        Float?
+  lng        Float?
   user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     Int
   answers    Answer[]
