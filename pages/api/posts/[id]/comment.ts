@@ -14,11 +14,36 @@ async function handler(
       session: { user },
     } = req;
 
+    const isExist = await client.wondering.findFirst({
+      where: {
+        postId: +id,
+        userId: user?.id,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!isExist) {
+      return res.status(404).json({
+        ok: false,
+        error: "post not found",
+      });
+    }
+
     const comment = await client.answer.create({
       data: {
         answer,
-        userId: user!.id,
-        postId: +id,
+        user: {
+          connect: {
+            id: user?.id,
+          },
+        },
+        post: {
+          connect: {
+            id: +id,
+          },
+        },
       },
     });
 
@@ -26,9 +51,38 @@ async function handler(
       ok: true,
       comment,
     });
+  } else if (req.method === "GET") {
+    const {
+      query: { id },
+      session: { user },
+    } = req;
+    const answers = await client.answer.findMany({
+      where: {
+        user: {
+          id: user?.id,
+        },
+        post: {
+          id: +id,
+        },
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            avatar: true,
+          },
+        },
+      },
+    });
+
+    return res.status(200).json({
+      ok: true,
+      answers,
+    });
   }
 }
 
 export default withApiSession(
-  withHandler({ method: ["POST"], handler, isPrivate: true })
+  withHandler({ method: ["POST", "GET"], handler, isPrivate: true })
 );

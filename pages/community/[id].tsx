@@ -9,7 +9,11 @@ import { classnames } from "lib/client/utils";
 import useUser from "hooks/useUser";
 import useMutation from "hooks/useMutation";
 import useQuery from "hooks/useQuery";
-import { postDetailResponseType, writeCommentInputType } from "types/post";
+import {
+  commentResponseType,
+  postDetailResponseType,
+  writeCommentInputType,
+} from "types/post";
 
 import Button from "components/Button";
 import Profile from "components/Profile";
@@ -36,9 +40,19 @@ const CommunityPostDetail: NextPage = () => {
       refreshInterval: 5000,
     }
   );
+  const { data: commentData, mutate: commentMutate } =
+    useQuery<commentResponseType>(
+      query.id && !isNaN(+query.id) ? `posts/${query.id}/comment` : null,
+      {
+        refreshInterval: 5000,
+      }
+    );
+
   const [uploadAnswer, { data: answerData, loading: answerLoading }] =
     useMutation(`posts/${query.id}/comment`);
-  const [toggleWonder] = useMutation(`posts/${query.id}/wonder`);
+  const [toggleWonder, { loading: wonderLoading }] = useMutation(
+    `posts/${query.id}/wonder`
+  );
 
   const { register, handleSubmit, resetField } =
     useForm<writeCommentInputType>();
@@ -49,33 +63,16 @@ const CommunityPostDetail: NextPage = () => {
     }
   }, [data, loading, error]);
 
+  useEffect(() => {
+    if (answerData?.ok) {
+      resetField("answer");
+      commentMutate();
+    }
+  }, [answerData]);
+
   const onValid = (data: writeCommentInputType) => {
     if (answerLoading) return;
     uploadAnswer(data);
-    boundMutate(
-      (prev) =>
-        prev &&
-        query && {
-          ...prev,
-          post: {
-            ...prev.post,
-            answers: [
-              ...prev.post.answers,
-              {
-                id: prev.post.answers[prev.post.answers.length - 1].id + 1,
-                answer: data.answer,
-                createdAt: new Date(),
-                updatedAt: new Date(),
-                postId: +(query.id as string),
-                user,
-                userId: user.id,
-              },
-            ],
-          },
-        }
-    );
-    mutate(`posts/${query.id}`);
-    resetField("answer");
   };
 
   const handleClickWonder = () => {
@@ -98,7 +95,7 @@ const CommunityPostDetail: NextPage = () => {
           },
         false
       );
-      mutate("users/me");
+      !wonderLoading && mutate("users/me");
     }
   };
 
@@ -109,7 +106,7 @@ const CommunityPostDetail: NextPage = () => {
           <Indicator />
         </Dimmer>
       )}
-      <div className="pb-8">
+      <div className="pb-[12rem]">
         <div className="pt-4">
           <span className="inline-flex items-center mx-2 px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100">
             동네질문
@@ -142,12 +139,12 @@ const CommunityPostDetail: NextPage = () => {
             </span>
             <span className="flex items-center space-x-2 text-sm">
               <Icon.CommentIcon />
-              <span>답변 {data?.post?.answers.length}</span>
+              <span>답변 {commentData?.answers.length}</span>
             </span>
           </div>
         </div>
         <div className="px-3 my-5 space-y-4">
-          {data?.post?.answers.map(
+          {commentData?.answers.map(
             ({ id, answer, updatedAt, user: { name } }) => (
               <Comment
                 key={id}
@@ -158,7 +155,10 @@ const CommunityPostDetail: NextPage = () => {
             )
           )}
         </div>
-        <form className="px-3 mt-2" onSubmit={handleSubmit(onValid)}>
+        <form
+          className="fixed w-full bg-white bottom-0 px-3 mt-2 pb-4"
+          onSubmit={handleSubmit(onValid)}
+        >
           <label></label>
           <TextArea
             placeholder="Answer this question!"
@@ -167,7 +167,7 @@ const CommunityPostDetail: NextPage = () => {
             })}
           />
           <Button className="w-full" type="submit">
-            Reply
+            {answerLoading ? "Loading.." : "Reply"}
           </Button>
         </form>
       </div>
