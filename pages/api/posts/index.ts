@@ -9,13 +9,15 @@ async function handler(
 ) {
   if (req.method === "POST") {
     const {
-      body: { question },
+      body: { question, lat, lng },
       session: { user },
     } = req;
 
     const post = await client.post.create({
       data: {
         question,
+        lat,
+        lng,
         userId: +user!.id,
       },
     });

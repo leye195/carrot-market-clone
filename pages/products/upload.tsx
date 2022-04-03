@@ -13,16 +13,18 @@ import Button from "components/Button";
 import TextArea from "components/TextArea";
 import Layout from "components/Layout";
 import Input from "components/Input";
+import useCoords from "hooks/useCoords";
 
 const ItemUpload: NextPage = () => {
   const router = useRouter();
+  const { lat, lng } = useCoords();
   const [uploadProduct, { loading, error, data }] =
     useMutation<uploadProductMutationType>("products");
   const { register, handleSubmit } = useForm<uploadProductInputType>();
 
   const onValid = (data: uploadProductInputType) => {
     if (loading) return;
-    uploadProduct(data);
+    uploadProduct({ ...data, lat, lng });
   };
 
   useEffect(() => {

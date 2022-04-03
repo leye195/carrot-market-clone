@@ -24,7 +24,7 @@ async function handler(
     });
   } else if (req.method === "POST") {
     const {
-      body: { name, price, description },
+      body: { name, price, description, lat, lng },
       session: { user },
     } = req;
 
@@ -35,6 +35,8 @@ async function handler(
         price: +price,
         userId: user!.id,
         image: "xx",
+        lat,
+        lng,
       },
     });
 
