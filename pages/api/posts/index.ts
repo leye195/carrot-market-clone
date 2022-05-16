@@ -27,6 +27,13 @@ async function handler(
       post,
     });
   } else if (req.method === "GET") {
+    const {
+      query: { lat, lng },
+    } = req;
+
+    const parsedLatitude = parseFloat(lat.toString());
+    const parsedLongitude = parseFloat(lng.toString());
+
     const posts = await client.post.findMany({
       include: {
         user: {
@@ -40,6 +47,17 @@ async function handler(
             answers: true,
             wonderList: true,
           },
+        },
+      },
+      where: {
+        // 범위 검색
+        lat: {
+          gte: parsedLatitude - 0.05,
+          lte: parsedLatitude + 0.05,
+        },
+        lng: {
+          gte: parsedLongitude - 0.05,
+          lte: parsedLongitude + 0.05,
         },
       },
     });

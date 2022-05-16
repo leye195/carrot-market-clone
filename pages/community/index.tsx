@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
+import useCoords from "hooks/useCoords";
 import useQuery from "hooks/useQuery";
-import { postResponseType } from "types/post";
+import type { postResponseType } from "types/post";
 
 import FloatingButton from "components/FloatingButton";
 import Layout from "components/Layout";
@@ -11,11 +13,13 @@ import Question from "components/Question";
 import Dimmer from "components/Dimmer";
 import Indicator from "components/Indicator";
 import Icon from "components/Icon";
-import { useEffect } from "react";
 
 const Community: NextPage = () => {
   const router = useRouter();
-  const { data, error, loading } = useQuery<postResponseType>("posts");
+  const { lat, lng } = useCoords();
+  const { data, error, loading } = useQuery<postResponseType>(
+    lat && lng ? `posts?lat=${lat}&lng=${lng}` : null
+  );
 
   const handleLink = () => {
     router.push("/community/write");
