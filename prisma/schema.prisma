@@ -55,19 +55,10 @@ model Product {
   favs        Fav[]
   sales       Sale[]
   purchases   Purchase[]
+  records     Record[]
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
-  records     Record[]
-}
 
-model Fav {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Post {
@@ -111,8 +102,19 @@ model Review {
   createdById  Int
   createdFor   User     @relation(name: "receivedReviews", fields: [createdForId], references: [id], onDelete: Cascade)
   createdForId Int
+  score        Int      @default(1)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model Fav {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Sale {
